@@ -104,17 +104,20 @@ public class Demo {
         Predicate<User> agePredicate = user -> user.getAge() == 25;
         Predicate<User> idPredicate = user -> user.getId() < 3;
 
-        userList = userList.stream().filter(agePredicate.or(idPredicate)).sorted((u1, u2) ->
-                u2.getId().compareTo(u1.getId())
-        ).collect(Collectors.toList());
-
-        userList.forEach(user -> System.out.println(user));
+        userList.stream()
+                .filter(agePredicate.or(idPredicate))
+                .sorted((u1, u2) -> u2.getId().compareTo(u1.getId()))
+                .limit(2)
+                .forEach(user -> System.out.println(user));
     }
 
+    /**
+     * lambda collectors
+     */
     private void lambdaCollect() {
         List<User> userList = User.getUserList();
 
-        // .map() .reduce()
+        // .map() 将对象进行转换
         System.out.println("修改前");
         userList.forEach(user -> System.out.println(user));
         System.out.println("修改后");
@@ -123,19 +126,28 @@ public class Demo {
             return user;
         }).forEach(user -> System.out.println(user));
 
+        // 流API的 reduce() 方法将所有数字合成一个
+        Integer ageSum = userList.stream().map(user -> user.getAge()).reduce((sum, user) -> sum + user).get();
+        System.out.println("修改后年龄总和" + ageSum);
+
+
+        System.out.println("==========================================================================");
+
+
         //排序过滤等一系列操作之后的元素 放入新的list
         userList = userList.stream().filter(user -> user.getAge() < 125).collect(Collectors.toList());
-        userList.forEach(user -> System.out.println(user));
+        userList.forEach(user -> System.out.println("年龄小于125的用户：" + user));
 
         //将 name 属性用" , "，连接拼接成一个字符串
         String names = userList.stream().map(user -> user.getName()).collect(Collectors.joining(","));
-        System.out.println("\n" + names);
+        System.out.println(names);
 
         //将name 放入到新的 set 集合中
         Set<String> nameSet = userList.stream().map(user -> user.getName()).collect(Collectors.toSet());
         nameSet.forEach(name -> System.out.println(name));
 
-        System.out.println("\nlist转map--------");
+        System.out.println("");
+        System.out.println("------list转map--------");
         Map<Integer, User> usersMap = userList.stream().collect(Collectors.toMap(u -> u.getId(), u -> u));
         usersMap.forEach((key, value) -> System.out.println(key + "：" + value));
 
