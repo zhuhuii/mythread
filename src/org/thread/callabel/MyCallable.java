@@ -1,6 +1,5 @@
-package org.callabel;
+package org.thread.callabel;
 
-import javax.sound.midi.Soundbank;
 import java.util.concurrent.Callable;
 
 /**
