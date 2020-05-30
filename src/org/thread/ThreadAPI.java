@@ -2,18 +2,22 @@ package org.thread;
 
 import org.thread.runnable.MyRunnable;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * @author zhuhui
  * @date 2020/5/22 21:34
  */
 public class ThreadAPI {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         ThreadAPI threadDemo = new ThreadAPI();
 
 //        threadDemo.threadAPI();
 //        threadDemo.sleep();
 //        threadDemo.join();
-        threadDemo.yield();
+//        threadDemo.yield();
+//        threadDemo.interrupd();
+        threadDemo.Isinterrupd();
     }
 
     /**
@@ -63,6 +67,7 @@ public class ThreadAPI {
     }
 
     private int count = 0;
+
     public void join() {
         Runnable myRunnable = () -> {
             for (int i = 0; i < 100; i++) {
@@ -76,7 +81,7 @@ public class ThreadAPI {
             thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             System.out.println(count);
         }
     }
@@ -102,5 +107,70 @@ public class ThreadAPI {
         Thread thread2 = new Thread(run2, "线程BBBBB");
         thread1.start();
         thread2.start();
+    }
+
+    public void interrupd() {
+        AtomicInteger num = new AtomicInteger();
+        Thread thread = new Thread(() -> {
+            // 若未发⽣中断，就正常执⾏任务
+            while (!Thread.currentThread().isInterrupted()) {
+                // 正常任务代码……
+                num.getAndIncrement();
+            }
+            // 中断的处理代码……    doSomething();
+            System.out.println("线程理论上中断了");
+        });
+        thread.start();
+        boolean alive = thread.isAlive();
+        System.out.println("线程是否存活：" + alive + "\n");
+
+        try {
+            Thread.currentThread().sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("线程中断？：" + thread.isInterrupted());
+
+        // 设置了⼀个中断标志
+        thread.interrupt();
+        System.out.println("线程中断？：" + thread.isInterrupted());
+        System.out.println("线程是否存活？：" + thread.isAlive());
+        System.out.println("num = " + num);
+    }
+
+    public void Isinterrupd() {
+        Thread thread = new Thread(() -> {
+            int num = 0;
+            while (num < 1000) {
+                try {
+                    // 睡个半秒钟我们再执⾏
+                    Thread.sleep(500);
+                    System.out.println(num++);
+
+                } catch (InterruptedException e) {
+
+                    // 判断该阻塞线程是否还在
+                    System.out.println(Thread.currentThread().isAlive());
+                    // 判断该线程的中断标志位状态
+                    System.out.println(Thread.currentThread().isInterrupted());
+
+                    System.out.println("In Runnable");
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // 创建线程并启动
+        System.out.println("This is main ");
+        thread.start();
+        try {
+            // 在 main线程睡个3秒钟
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        // 设置中断
+        thread.interrupt();
     }
 }
