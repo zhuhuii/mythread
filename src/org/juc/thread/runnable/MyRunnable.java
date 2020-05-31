@@ -12,9 +12,9 @@ public class MyRunnable implements Runnable {
         String threadName = Thread.currentThread().getName();
         System.err.println(threadName);
 
-        for (int i = 1; i <= 50; i++) {
+        for (int i = 1; i <= 20; i++) {
             try {
-                long millis = (long) (Math.random() * (30));
+                long millis = (long) (Math.random() * (50));
                 Thread.sleep(millis);
                 System.out.println(threadName + "：" + i);
             } catch (InterruptedException e) {
