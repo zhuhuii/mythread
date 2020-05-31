@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * LockCondition 监视器
  */
-public class LockCondition {
+public class LockDataCondition {
     // 1=A  2=B  3=C
     private int num = 1;
     private Lock lock = new ReentrantLock();

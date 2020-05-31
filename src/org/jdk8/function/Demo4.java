@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 /**
  * Supplier 供给型接口
  */
-public class Demo4 {
+class Demo4 {
     public static void main(String[] args) {
 //        Supplier<Integer> supplier = new Supplier<Integer>() {
 //            @Override

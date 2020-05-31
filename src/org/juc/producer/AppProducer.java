@@ -68,7 +68,7 @@ public class AppProducer {
      * lock 实现精准唤醒
      */
     private static void conditionSignal() {
-        LockCondition lockCondition = new LockCondition();
+        LockDataCondition lockCondition = new LockDataCondition();
         new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 try {

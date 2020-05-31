@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 /**
  * Consumer 消费型接口
  */
-public class Demo3 {
+class Demo3 {
     public static void main(String[] args) {
 //        Consumer<String> consumer = new Consumer<String>() {
 //            @Override
