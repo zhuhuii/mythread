@@ -17,9 +17,9 @@ import java.util.List;
  * https://www.cnblogs.com/coprince/p/8603492.html
  * https://blog.csdn.net/s10461/article/details/53941091
  */
-class Demo {
+class WhyUseGeneric {
     public static void main(String[] args) {
-        Demo instance = new Demo();
+        WhyUseGeneric instance = new WhyUseGeneric();
 
         try {
             instance.test01();
