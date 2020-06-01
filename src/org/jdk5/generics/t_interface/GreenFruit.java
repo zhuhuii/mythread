@@ -5,7 +5,7 @@ package org.jdk5.generics.t_interface;
  * 即：class FruitGenerator<T> implements Generator<T>{
  * 如果不声明泛型，如：class FruitGenerator implements Generator<T>，编译器会报错："Unknown class"
  */
-public class FruitGenerator<T> implements Generator<T> {
+public class GreenFruit<T> implements Food<T> {
     @Override
     public T next() {
         return null;

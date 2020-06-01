@@ -5,6 +5,8 @@ package org.jdk5.generics.t_interface;
  */
 class Demo {
     public static void main(String[] args) {
+        Vegetables vegetables = new Vegetables();
+        System.out.println(vegetables.next());
     }
 }
 

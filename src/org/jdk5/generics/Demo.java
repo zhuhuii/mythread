@@ -1,7 +1,5 @@
 package org.jdk5.generics;
 
-import org.juc.volatiles.Atomic;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +16,10 @@ import java.util.List;
  *
  * https://www.cnblogs.com/coprince/p/8603492.html
  * https://blog.csdn.net/s10461/article/details/53941091
- * https://www.cnblogs.com/lwbqqyumidi/p/3837629.html
  */
-class Demo1 {
+class Demo {
     public static void main(String[] args) {
-        Demo1 instance = new Demo1();
+        Demo instance = new Demo();
 
         try {
             instance.test01();
