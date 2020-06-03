@@ -29,5 +29,11 @@ class Static {
     public static void main(String[] args) {
         Static.show("中国");
         Static.printMsg(123, "zhangsan", true, 66.99, 10086L, new User(1, "lisi", 18));
+
+        /**
+         * java.lang.NullPointerException 》 方法中的可变参数需要判断是否为空
+         * // Static.printMsg();
+         * // Static.printMsg(null);
+         */
     }
 }

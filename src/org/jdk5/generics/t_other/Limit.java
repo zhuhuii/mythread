@@ -1,7 +1,5 @@
 package org.jdk5.generics.t_other;
 
-import java.util.List;
-
 /**
  * 泛型上下边界
  */

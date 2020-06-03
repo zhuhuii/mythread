@@ -9,9 +9,10 @@ class Wildcard {
         numberGeneric.showKeyValue1(numberGeneric);
 
         Generic<Integer> integerGeneric = new Generic<>(666);
+        integerGeneric.showKeyValue2(integerGeneric);
+
         // cannot be applied to Generic<java.lang.Number>
         // integerMyGeneric.showKeyValue(integerMyGeneric);
-        integerGeneric.showKeyValue2(integerGeneric);
     }
 }
 
