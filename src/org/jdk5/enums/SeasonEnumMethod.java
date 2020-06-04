@@ -6,7 +6,7 @@ package org.jdk5.enums;
  *  values(): 返回枚举类型的对象数组
  *  valueof(String name) :根据名称获取枚举类中定义的常量值;要求字符串跟枚举的常量名必须一致;
  */
-public class EnumMethod {
+public class SeasonEnumMethod {
     public static void main(String[] args) {
         values();
         valueOf();
