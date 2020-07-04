@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Auther {
+public @interface Author {
     String username() default "zhangsan";
 
     String password() default "123456";

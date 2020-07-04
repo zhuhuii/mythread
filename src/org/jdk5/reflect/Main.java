@@ -8,41 +8,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- * @Author: zhuhui
- * @Description:
+ * 1、获取class对象
+ * 2、获取有参、无参的构造方法
+ * 3、用构造方法创建对象
+ * 4、获取类或接口声明的方法、字段
+ * 6、用反射执行方法
  */
 public class Main {
-
-    @Test
-    public void newInstance() throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
-        /**
-         * 通过反射来生成对象主要有两种方式。
-         */
-        Class<Dog> dogClass = Dog.class;
-        Dog dog1 = dogClass.newInstance();
-
-        /**
-         * 用Class对象获取无参构造Constructor对象
-         */
-        Constructor<Dog> constructor1 = dogClass.getConstructor();
-        Constructor<Dog> constructor2 = dogClass.getConstructor(null);
-        Dog dog2 = constructor1.newInstance();
-        Dog dog22 = constructor2.newInstance(null);
-
-        /**
-         * 用Class对象获取指定的Constructor对象
-         */
-        Constructor<Dog> constructor3 = dogClass.getConstructor(String.class, String[].class);
-        Dog dog3 = constructor3.newInstance("德国牧羊犬", new java.lang.String[]{"柴犬", "金毛", "哈士奇", "秋田犬"});
-
-
-        System.out.println("\n----------------------------------\n");
-        System.out.println("dog1：" + dog1);
-        System.out.println("dog2：" + dog2);
-        System.out.println("dog3：" + dog3);
-        System.out.println("dog1 == dog2：" + (dog1 == dog2));
-        System.out.println("dog1 .eq dog2：" + (dog1.equals(dog2)));
-    }
 
     @Test
     public void getClassObj() throws ClassNotFoundException {
@@ -60,16 +32,48 @@ public class Main {
          * 获取到对象构造方法：
          */
         Class<Dog> dogClass = Dog.class;
-        Constructor<Dog> constructor = dogClass.getConstructor();
-        Constructor<Dog> constructor1 = dogClass.getConstructor(String.class, String[].class);
+        Constructor<Dog> constructor1 = dogClass.getConstructor();
+        Constructor<Dog> constructor2 = dogClass.getConstructor(String.class, String[].class);
 
         /**
          * 用构造方法创建对象
          */
-        Dog dog1 = constructor.newInstance();
-        Dog dog2 = constructor1.newInstance("哈士奇", new String[]{"拆家"});
+        Dog dog1 = constructor1.newInstance();
+        Dog dog2 = constructor2.newInstance("哈士奇", new String[]{"拆家"});
+
         System.out.println("dog1：" + dog1);
         System.out.println("dog2：" + dog2);
+    }
+
+    @Test
+    public void newInstance() throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
+        /**
+         * 通过反射来生成对象主要有两种方式。
+         */
+        Class<Dog> dogClass = Dog.class;
+        Dog dog = dogClass.newInstance();
+
+        /**
+         * 用Class对象获取无参构造Constructor对象
+         */
+        Constructor<Dog> constructor1 = dogClass.getConstructor();
+        Constructor<Dog> constructor2 = dogClass.getConstructor(null);
+        Dog dog1 = constructor1.newInstance();
+        Dog dog2 = constructor2.newInstance(null);
+
+        /**
+         * 用Class对象获取指定的Constructor对象
+         */
+        Constructor<Dog> constructor3 = dogClass.getConstructor(String.class, String[].class);
+        Dog dog3 = constructor3.newInstance("德国牧羊犬", new java.lang.String[]{"柴犬", "金毛", "哈士奇", "秋田犬"});
+
+        System.out.println("dog：" + dog);
+        System.out.println("dog1：" + dog1);
+        System.out.println("dog2：" + dog2);
+        System.out.println("dog3：" + dog3);
+
+        System.out.println("dog1 == dog2 结果：" + (dog1 == dog2));
+        System.out.println("dog1 .eq dog2 结果：" + (dog1.equals(dog2)));
     }
 
     @Test
@@ -105,17 +109,19 @@ public class Main {
     @Test
     public void executeMethod() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
         /**
-         * 执行方法
+         * 执行公有方法
          **/
         Class<Dog> dogClass = Dog.class;
         Method toString = dogClass.getMethod("toString");
-        Object result = toString.invoke(dogClass.newInstance());
-        System.out.println(result);
+        toString.invoke(dogClass.newInstance());
 
+        /**
+         * 执行私有方法
+         **/
         Method gnaw = dogClass.getDeclaredMethod("gnaw");
         gnaw.setAccessible(true);
         //Class Main can not access a member of class Dog with modifiers "private"
-        gnaw.invoke(dogClass.newInstance());
+        gnaw.invoke(dogClass.newInstance(), null);
     }
 
     @Test

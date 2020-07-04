@@ -1,12 +1,7 @@
 package org.jdk5.reflect;
 
 import java.util.Arrays;
-import java.util.Objects;
 
-/**
- * @Author: zhuhui
- * @Description:
- */
 public class Dog extends Animal {
     /**
      * 品种
@@ -50,29 +45,20 @@ public class Dog extends Animal {
 
 
     public Dog() {
-        System.out.println("this -> 子类无参构造方法\n");
+        System.out.println("this -> 子类无参构造方法，无参！\n");
     }
 
     public Dog(String breed, String[] hobbys) {
         this.breed = breed;
         this.hobbys = hobbys;
-        System.out.println(String.format("this -> 子类有参构造方法 --> { breed:%s , hobbys:%s }", breed, hobbys.toString()));
+        System.out.println("this -> 子类有参构造方法、有参、有参、有参！\n");
     }
 
     protected Dog(String name, Integer age, Float weight, String breed, String[] hobbys) {
-        super(name,age,weight);
+        super(name, age, weight);
         this.breed = breed;
         this.hobbys = hobbys;
         System.out.println("this -> 全部参数...\n");
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Dog)) return false;
-        Dog dog = (Dog) o;
-        return Objects.equals(getBreed(), dog.getBreed()) &&
-                Arrays.equals(getHobbys(), dog.getHobbys()) && super.equals(o);
     }
 
     @Override
